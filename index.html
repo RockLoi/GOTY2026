@@ -115,6 +115,29 @@ header p{
     margin-bottom:10px;
     font-weight:bold;
     font-size:1.3rem;
+    cursor:pointer;
+    user-select:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.tier-header::after{
+    content:"▼";
+    font-size:.8rem;
+    transition:transform .2s ease;
+}
+
+.tier.collapsed .tier-header::after{
+    transform:rotate(-90deg);
+}
+
+.tier-content{
+    overflow:hidden;
+}
+
+.tier.collapsed .tier-content{
+    display:none;
 }
 
 .tier-s{background:var(--s);color:#000;}
@@ -136,7 +159,7 @@ header p{
     overflow:hidden;
     cursor:pointer;
     border:2px solid transparent;
-    transition:0.2s;
+    transition:.2s;
 }
 
 .game-card:hover{
@@ -174,13 +197,14 @@ header p{
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
 <header>
     <h1>🏆 Lee's GOTY Tier List</h1>
-    <p>Tap a cover to read my thoughts.</p>
+    <p>Tap a game cover to read my thoughts.</p>
 </header>
 
 <div class="review-panel" id="reviewPanel">
@@ -281,7 +305,7 @@ review:`Replace with your review.`
 /* B */
 
 {
-title:"Castlevania: Belmont's Curse",
+title:"Castlevania",
 tier:"B",
 image:"images/Castlevania Belmont's Curse.png",
 review:`Replace with your review.`
@@ -382,7 +406,7 @@ image:"images/Metroid Prime 4 Beyond.png",
 review:`Replace with your review.`
 },
 
-/* DNF */
+/* DID NOT FINISH */
 
 {
 title:"Forza Horizon 6",
@@ -410,9 +434,8 @@ review:`Replace with your review.`
 const tierOrder = ["S","A","B","C","D","DNF"];
 
 function getTierClass(tier){
-    return tier === "DNF"
-        ? "tier-dnf"
-        : `tier-${tier.toLowerCase()}`;
+    if(tier === "DNF") return "tier-dnf";
+    return `tier-${tier.toLowerCase()}`;
 }
 
 const reviewPanel = document.getElementById("reviewPanel");
@@ -430,7 +453,9 @@ function showGame(game){
 
         <div class="review-content">
 
-            <div class="review-title">${game.title}</div>
+            <div class="review-title">
+                ${game.title}
+            </div>
 
             <div class="review-tier ${getTierClass(game.tier)}">
                 ${game.tier === "DNF"
@@ -438,7 +463,9 @@ function showGame(game){
                     : game.tier + " Tier"}
             </div>
 
-            <div class="review-text">${game.review}</div>
+            <div class="review-text">
+                ${game.review}
+            </div>
 
         </div>
 
@@ -461,8 +488,9 @@ function showGame(game){
 
 tierOrder.forEach(tier => {
 
-    const tierGames =
-        games.filter(game => game.tier === tier);
+    const tierGames = games.filter(
+        game => game.tier === tier
+    );
 
     const section = document.createElement("section");
 
@@ -470,34 +498,50 @@ tierOrder.forEach(tier => {
 
     section.innerHTML = `
     <div class="tier-header ${getTierClass(tier)}">
-        ${tier === "DNF" ? "Did Not Finish" : tier + " Tier"}
+
+        <span>
+            ${tier === "DNF"
+                ? "Did Not Finish"
+                : tier + " Tier"}
+        </span>
+
     </div>
 
-    <div class="game-grid">
+    <div class="tier-content">
 
-        ${tierGames.map(game => `
-        <div class="game-card"
-             data-title="${game.title}">
+        <div class="game-grid">
 
-            <img src="${game.image}"
-                 alt="${game.title}">
+            ${tierGames.map(game => `
 
-            <div class="game-title">
-                ${game.title}
+            <div
+                class="game-card"
+                data-title="${game.title}">
+
+                <img
+                    src="${game.image}"
+                    alt="${game.title}">
+
+                <div class="game-title">
+                    ${game.title}
+                </div>
+
             </div>
 
+            `).join("")}
+
         </div>
-        `).join("")}
 
     </div>
     `;
 
     tiersContainer.appendChild(section);
+
 });
 
 document.addEventListener("click", e => {
 
     const card = e.target.closest(".game-card");
+
     if(!card) return;
 
     const game = games.find(
@@ -507,7 +551,22 @@ document.addEventListener("click", e => {
     if(game){
         showGame(game);
     }
+
 });
+
+document
+    .querySelectorAll(".tier-header")
+    .forEach(header => {
+
+        header.addEventListener("click", () => {
+
+            header
+                .closest(".tier")
+                .classList.toggle("collapsed");
+
+        });
+
+    });
 
 </script>
 
