@@ -6,19 +6,23 @@
 <title>Lee's GOTY Tier List</title>
 
 <style>
+html{
+    scroll-behavior:smooth;
+}
+
 :root{
     --bg:#0f1117;
     --panel:#181c24;
-    --panel-hover:#222838;
+    --panel-hover:#242b3d;
     --border:#30364a;
     --text:#e8eaf0;
-    --muted:#9da5b7;
+    --muted:#99a3b7;
 
     --s:#ffb703;
     --a:#90be6d;
     --b:#4cc9f0;
     --c:#c77dff;
-    --d:#6c757d;
+    --d:#808080;
     --dnf:#8b0000;
 }
 
@@ -29,9 +33,9 @@
 }
 
 body{
-    font-family:Segoe UI, system-ui, sans-serif;
     background:var(--bg);
     color:var(--text);
+    font-family:Segoe UI,system-ui,sans-serif;
     line-height:1.6;
 }
 
@@ -61,10 +65,11 @@ header p{
     border-radius:20px;
     overflow:hidden;
     margin-bottom:30px;
+    min-height:250px;
 }
 
 .placeholder{
-    padding:60px 20px;
+    padding:80px 20px;
     text-align:center;
     color:var(--muted);
 }
@@ -80,7 +85,7 @@ header p{
 }
 
 .review-content{
-    padding:20px;
+    padding:25px;
 }
 
 .review-title{
@@ -90,7 +95,7 @@ header p{
 
 .review-tier{
     display:inline-block;
-    padding:6px 12px;
+    padding:6px 14px;
     border-radius:999px;
     font-weight:bold;
     margin-bottom:15px;
@@ -106,10 +111,10 @@ header p{
 
 .tier-header{
     padding:12px 16px;
-    font-size:1.3rem;
-    font-weight:bold;
     border-radius:12px;
     margin-bottom:10px;
+    font-weight:bold;
+    font-size:1.3rem;
 }
 
 .tier-s{background:var(--s);color:#000;}
@@ -151,12 +156,12 @@ header p{
 }
 
 .game-title{
-    padding:8px;
-    font-size:0.85rem;
     text-align:center;
+    padding:8px;
+    font-size:.85rem;
 }
 
-@media (min-width:900px){
+@media(min-width:900px){
 
     .review-layout{
         display:grid;
@@ -175,12 +180,12 @@ header p{
 
 <header>
     <h1>🏆 Lee's GOTY Tier List</h1>
-    <p>Click any cover to read my thoughts.</p>
+    <p>Tap a cover to read my thoughts.</p>
 </header>
 
 <div class="review-panel" id="reviewPanel">
     <div class="placeholder">
-        Select a game to see the review.
+        Select a game to view the review.
     </div>
 </div>
 
@@ -198,27 +203,21 @@ const games = [
 title:"No Rest for the Wicked",
 tier:"S",
 image:"images/No Rest For The Wicked.jpg",
-review:`Replace with your review.
-
-Second paragraph here.`
+review:`Replace with your review.`
 },
 
 {
 title:"Order of the Sinking Star",
 tier:"S",
 image:"images/Order Of The Sinking Star.jpg",
-review:`Replace with your review.
-
-Second paragraph here.`
+review:`Replace with your review.`
 },
 
 {
 title:"Slay the Spire 2",
 tier:"S",
 image:"images/Slay The Spire 2.png",
-review:`Replace with your review.
-
-Second paragraph here.`
+review:`Replace with your review.`
 },
 
 /* A */
@@ -411,8 +410,9 @@ review:`Replace with your review.`
 const tierOrder = ["S","A","B","C","D","DNF"];
 
 function getTierClass(tier){
-    if(tier === "DNF") return "tier-dnf";
-    return `tier-${tier.toLowerCase()}`;
+    return tier === "DNF"
+        ? "tier-dnf"
+        : `tier-${tier.toLowerCase()}`;
 }
 
 const reviewPanel = document.getElementById("reviewPanel");
@@ -430,17 +430,15 @@ function showGame(game){
 
         <div class="review-content">
 
-            <div class="review-title">
-                ${game.title}
-            </div>
+            <div class="review-title">${game.title}</div>
 
             <div class="review-tier ${getTierClass(game.tier)}">
-                ${game.tier === "DNF" ? "Did Not Finish" : game.tier + " Tier"}
+                ${game.tier === "DNF"
+                    ? "Did Not Finish"
+                    : game.tier + " Tier"}
             </div>
 
-            <div class="review-text">
-                ${game.review}
-            </div>
+            <div class="review-text">${game.review}</div>
 
         </div>
 
@@ -454,13 +452,20 @@ function showGame(game){
     document
         .querySelector(`[data-title="${game.title}"]`)
         ?.classList.add("active");
+
+    reviewPanel.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
 }
 
 tierOrder.forEach(tier => {
 
-    const tierGames = games.filter(game => game.tier === tier);
+    const tierGames =
+        games.filter(game => game.tier === tier);
 
     const section = document.createElement("section");
+
     section.className = "tier";
 
     section.innerHTML = `
@@ -471,34 +476,28 @@ tierOrder.forEach(tier => {
     <div class="game-grid">
 
         ${tierGames.map(game => `
+        <div class="game-card"
+             data-title="${game.title}">
 
-        <div
-            class="game-card"
-            data-title="${game.title}">
-
-            <img
-                src="${game.image}"
-                alt="${game.title}">
+            <img src="${game.image}"
+                 alt="${game.title}">
 
             <div class="game-title">
                 ${game.title}
             </div>
 
         </div>
-
         `).join("")}
 
     </div>
     `;
 
     tiersContainer.appendChild(section);
-
 });
 
 document.addEventListener("click", e => {
 
     const card = e.target.closest(".game-card");
-
     if(!card) return;
 
     const game = games.find(
@@ -508,7 +507,6 @@ document.addEventListener("click", e => {
     if(game){
         showGame(game);
     }
-
 });
 
 </script>
