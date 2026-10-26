@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lee's GOTY Tier List</title>
 
 <style>
-html{
-    scroll-behavior:smooth;
-}
 
 :root{
     --bg:#0f1117;
     --panel:#181c24;
     --panel-hover:#242b3d;
     --border:#30364a;
-    --text:#e8eaf0;
-    --muted:#99a3b7;
+    --text:#edf1f7;
+    --muted:#9da6b8;
 
     --s:#ffb703;
     --a:#90be6d;
@@ -27,9 +24,9 @@ html{
 }
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 body{
@@ -40,7 +37,7 @@ body{
 }
 
 .container{
-    width:min(1200px,95%);
+    width:min(1400px,95%);
     margin:auto;
     padding:20px;
 }
@@ -52,71 +49,24 @@ header{
 
 header h1{
     font-size:2.5rem;
-    margin-bottom:10px;
 }
 
 header p{
     color:var(--muted);
 }
 
-.review-panel{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:20px;
-    overflow:hidden;
-    margin-bottom:30px;
-    min-height:250px;
-}
-
-.placeholder{
-    padding:80px 20px;
-    text-align:center;
-    color:var(--muted);
-}
-
-.review-layout{
-    display:block;
-}
-
-.review-cover{
-    width:100%;
-    display:block;
-    object-fit:cover;
-}
-
-.review-content{
-    padding:25px;
-}
-
-.review-title{
-    font-size:2rem;
-    margin-bottom:10px;
-}
-
-.review-tier{
-    display:inline-block;
-    padding:6px 14px;
-    border-radius:999px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
-
-.review-text{
-    white-space:pre-line;
-}
-
 .tier{
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .tier-header{
-    padding:12px 16px;
+    padding:14px 18px;
+    font-size:1.3rem;
+    font-weight:bold;
     border-radius:12px;
     margin-bottom:10px;
-    font-weight:bold;
-    font-size:1.3rem;
     cursor:pointer;
-    user-select:none;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -124,33 +74,35 @@ header p{
 
 .tier-header::after{
     content:"▼";
-    font-size:.8rem;
-    transition:transform .2s ease;
+    transition:0.2s;
 }
 
 .tier.collapsed .tier-header::after{
     transform:rotate(-90deg);
 }
 
-.tier-content{
-    overflow:hidden;
-}
-
 .tier.collapsed .tier-content{
     display:none;
 }
 
-.tier-s{background:var(--s);color:#000;}
-.tier-a{background:var(--a);color:#000;}
-.tier-b{background:var(--b);color:#000;}
+.tier-s{background:var(--s);color:black;}
+.tier-a{background:var(--a);color:black;}
+.tier-b{background:var(--b);color:black;}
 .tier-c{background:var(--c);}
 .tier-d{background:var(--d);}
 .tier-dnf{background:var(--dnf);}
 
 .game-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
-    gap:12px;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+@media(min-width:700px){
+
+    .game-grid{
+        grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    }
 }
 
 .game-card{
@@ -159,7 +111,7 @@ header p{
     overflow:hidden;
     cursor:pointer;
     border:2px solid transparent;
-    transition:.2s;
+    transition:0.2s;
 }
 
 .game-card:hover{
@@ -179,39 +131,83 @@ header p{
 }
 
 .game-title{
-    text-align:center;
     padding:8px;
+    text-align:center;
     font-size:.85rem;
+}
+
+.review-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:18px;
+    margin-top:15px;
+    overflow:hidden;
+}
+
+.review-layout{
+    display:block;
+}
+
+.review-image{
+    width:100%;
+    display:block;
+    object-fit:cover;
+}
+
+.review-content{
+    padding:20px;
+}
+
+.review-title{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.review-text{
+    white-space:pre-line;
+}
+
+.nav-buttons{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.nav-buttons button{
+    border:none;
+    background:#2f374d;
+    color:white;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.nav-buttons button:hover{
+    background:#404a63;
 }
 
 @media(min-width:900px){
 
     .review-layout{
         display:grid;
-        grid-template-columns:300px 1fr;
+        grid-template-columns:320px 1fr;
     }
 
-    .review-cover{
+    .review-image{
         height:100%;
     }
 }
+
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
 <header>
-    <h1>🏆 Lee's GOTY Tier List</h1>
-    <p>Tap a game cover to read my thoughts.</p>
+<h1>🏆 Lee's GOTY Tier List</h1>
+<p>Tap a cover to read my thoughts.</p>
 </header>
-
-<div class="review-panel" id="reviewPanel">
-    <div class="placeholder">
-        Select a game to view the review.
-    </div>
-</div>
 
 <div id="tiers"></div>
 
@@ -221,246 +217,99 @@ header p{
 
 const games = [
 
-/* S */
+{title:"No Rest for the Wicked",tier:"S",image:"images/No Rest For The Wicked.jpg",review:"Replace with review text."},
+{title:"Order of the Sinking Star",tier:"S",image:"images/Order Of The Sinking Star.jpg",review:"Replace with review text."},
+{title:"Slay the Spire 2",tier:"S",image:"images/Slay The Spire 2.png",review:"Replace with review text."},
 
-{
-title:"No Rest for the Wicked",
-tier:"S",
-image:"images/No Rest For The Wicked.jpg",
-review:`Replace with your review.`
-},
+{title:"Big Walk",tier:"A",image:"images/Big Walk.png",review:"Replace with review text."},
+{title:"Kaizen: A Factory Story",tier:"A",image:"images/Kaizen A Factory Story.png",review:"Replace with review text."},
+{title:"Marvel's Spider-Man 2",tier:"A",image:"images/Marvels Spider-Man 2.webp",review:"Replace with review text."},
+{title:"Mina the Hollower",tier:"A",image:"images/Mina the Hollower.png",review:"Replace with review text."},
+{title:"Opus Magnum: De Re Metallica",tier:"A",image:"images/Opus Magnum De Re Metallica.jpg",review:"Replace with review text."},
+{title:"Sifu",tier:"A",image:"images/Sifu.jpg",review:"Replace with review text."},
+{title:"Two Point Museum",tier:"A",image:"images/Two Point Museum.png",review:"Replace with review text."},
+{title:"Well Dweller",tier:"A",image:"images/Well Dweller.jpg",review:"Replace with review text."},
 
-{
-title:"Order of the Sinking Star",
-tier:"S",
-image:"images/Order Of The Sinking Star.jpg",
-review:`Replace with your review.`
-},
+{title:"Castlevania",tier:"B",image:"images/Castlevania Belmont's Curse.png",review:"Replace with review text."},
+{title:"Dogpile",tier:"B",image:"images/Dogpile.jpg",review:"Replace with review text."},
+{title:"Kabuto Park",tier:"B",image:"images/Kabuto Park.png",review:"Replace with review text."},
+{title:"LEGO Voyagers",tier:"B",image:"images/LEGO Voyagers.jpg",review:"Replace with review text."},
+{title:"Nintendo Switch Sports Resort",tier:"B",image:"images/Nintendo Switch Sports Resort.avif",review:"Replace with review text."},
+{title:"Sheepo",tier:"B",image:"images/Sheepo.png",review:"Replace with review text."},
+{title:"The Outer Worlds 2",tier:"B",image:"images/The Outer Worlds 2.jpg",review:"Replace with review text."},
+{title:"UVS Nirmana",tier:"B",image:"images/UVS Nirmana.png",review:"Replace with review text."},
 
-{
-title:"Slay the Spire 2",
-tier:"S",
-image:"images/Slay The Spire 2.png",
-review:`Replace with your review.`
-},
+{title:"Subnautica Below Zero",tier:"C",image:"images/Subnautica Below Zero.jpg",review:"Replace with review text."},
+{title:"The Signal State",tier:"C",image:"images/The Signal State.webp",review:"Replace with review text."},
+{title:"Wo Long: Fallen Dynasty",tier:"C",image:"images/Wo Long Fallen Dynasty.png",review:"Replace with review text."},
+{title:"Beast of Reincarnation",tier:"C",image:"images/Beast of Reincarnation.jpg",review:"Replace with review text."},
 
-/* A */
+{title:"Katamari Royal Reverie",tier:"D",image:"images/Katamari Royal Reverie.jpg",review:"Replace with review text."},
+{title:"Metroid Prime 4 Beyond",tier:"D",image:"images/Metroid Prime 4 Beyond.png",review:"Replace with review text."},
 
-{
-title:"Big Walk",
-tier:"A",
-image:"images/Big Walk.png",
-review:`Replace with your review.`
-},
-
-{
-title:"Kaizen: A Factory Story",
-tier:"A",
-image:"images/Kaizen A Factory Story.png",
-review:`Replace with your review.`
-},
-
-{
-title:"Marvel's Spider-Man 2",
-tier:"A",
-image:"images/Marvels Spider-Man 2.webp",
-review:`Replace with your review.`
-},
-
-{
-title:"Mina the Hollower",
-tier:"A",
-image:"images/Mina the Hollower.png",
-review:`Replace with your review.`
-},
-
-{
-title:"Opus Magnum: De Re Metallica",
-tier:"A",
-image:"images/Opus Magnum De Re Metallica.jpg",
-review:`Replace with your review.`
-},
-
-{
-title:"Sifu",
-tier:"A",
-image:"images/Sifu.jpg",
-review:`Replace with your review.`
-},
-
-{
-title:"Two Point Museum",
-tier:"A",
-image:"images/Two Point Museum.png",
-review:`Replace with your review.`
-},
-
-{
-title:"Well Dweller",
-tier:"A",
-image:"images/Well Dweller.jpg",
-review:`Replace with your review.`
-},
-
-/* B */
-
-{
-title:"Castlevania",
-tier:"B",
-image:"images/Castlevania Belmont's Curse.png",
-review:`Replace with your review.`
-},
-
-{
-title:"Dogpile",
-tier:"B",
-image:"images/Dogpile.jpg",
-review:`Replace with your review.`
-},
-
-{
-title:"Kabuto Park",
-tier:"B",
-image:"images/Kabuto Park.png",
-review:`Replace with your review.`
-},
-
-{
-title:"LEGO Voyagers",
-tier:"B",
-image:"images/LEGO Voyagers.jpg",
-review:`Replace with your review.`
-},
-
-{
-title:"Nintendo Switch Sports Resort",
-tier:"B",
-image:"images/Nintendo Switch Sports Resort.avif",
-review:`Replace with your review.`
-},
-
-{
-title:"Sheepo",
-tier:"B",
-image:"images/Sheepo.png",
-review:`Replace with your review.`
-},
-
-{
-title:"The Outer Worlds 2",
-tier:"B",
-image:"images/The Outer Worlds 2.jpg",
-review:`Replace with your review.`
-},
-
-{
-title:"UVS Nirmana",
-tier:"B",
-image:"images/UVS Nirmana.png",
-review:`Replace with your review.`
-},
-
-/* C */
-
-{
-title:"Subnautica Below Zero",
-tier:"C",
-image:"images/Subnautica Below Zero.jpg",
-review:`Replace with your review.`
-},
-
-{
-title:"The Signal State",
-tier:"C",
-image:"images/The Signal State.webp",
-review:`Replace with your review.`
-},
-
-{
-title:"Wo Long: Fallen Dynasty",
-tier:"C",
-image:"images/Wo Long Fallen Dynasty.png",
-review:`Replace with your review.`
-},
-
-{
-title:"Beast of Reincarnation",
-tier:"C",
-image:"images/Beast of Reincarnation.jpg",
-review:`Replace with your review.`
-},
-
-/* D */
-
-{
-title:"Katamari Royal Reverie",
-tier:"D",
-image:"images/Katamari Royal Reverie.jpg",
-review:`Replace with your review.`
-},
-
-{
-title:"Metroid Prime 4 Beyond",
-tier:"D",
-image:"images/Metroid Prime 4 Beyond.png",
-review:`Replace with your review.`
-},
-
-/* DID NOT FINISH */
-
-{
-title:"Forza Horizon 6",
-tier:"DNF",
-image:"images/Forza Horizon 6.png",
-review:`Replace with your review.`
-},
-
-{
-title:"Pinball Spire",
-tier:"DNF",
-image:"images/Pinball Spire.jpg",
-review:`Replace with your review.`
-},
-
-{
-title:"Resident Evil 4",
-tier:"DNF",
-image:"images/Resident Evil 4.png",
-review:`Replace with your review.`
-}
+{title:"Forza Horizon 6",tier:"DNF",image:"images/Forza Horizon 6.png",review:"Replace with review text."},
+{title:"Pinball Spire",tier:"DNF",image:"images/Pinball Spire.jpg",review:"Replace with review text."},
+{title:"Resident Evil 4",tier:"DNF",image:"images/Resident Evil 4.png",review:"Replace with review text."}
 
 ];
 
 const tierOrder = ["S","A","B","C","D","DNF"];
 
+let currentGame = null;
+
 function getTierClass(tier){
-    if(tier === "DNF") return "tier-dnf";
+
+    if(tier==="DNF") return "tier-dnf";
+
     return `tier-${tier.toLowerCase()}`;
 }
 
-const reviewPanel = document.getElementById("reviewPanel");
-const tiersContainer = document.getElementById("tiers");
+const container = document.getElementById("tiers");
 
-function showGame(game){
+function getVisibleGames(){
 
-    reviewPanel.innerHTML = `
+    return games;
+}
+
+function showReview(game){
+
+    currentGame = game;
+
+    document
+        .querySelectorAll(".review-card")
+        .forEach(x=>x.remove());
+
+    document
+        .querySelectorAll(".game-card")
+        .forEach(x=>x.classList.remove("active"));
+
+    const card = document.querySelector(
+        `[data-title="${CSS.escape(game.title)}"]`
+    );
+
+    card.classList.add("active");
+
+    const review = document.createElement("div");
+
+    review.className = "review-card";
+
+    review.innerHTML = `
     <div class="review-layout">
 
         <img
-            class="review-cover"
+            class="review-image"
             src="${game.image}"
             alt="${game.title}">
 
         <div class="review-content">
 
-            <div class="review-title">
-                ${game.title}
+            <div class="nav-buttons">
+                <button onclick="previousGame()">← Previous</button>
+                <button onclick="nextGame()">Next →</button>
             </div>
 
-            <div class="review-tier ${getTierClass(game.tier)}">
-                ${game.tier === "DNF"
-                    ? "Did Not Finish"
-                    : game.tier + " Tier"}
+            <div class="review-title">
+                ${game.title}
             </div>
 
             <div class="review-text">
@@ -472,46 +321,58 @@ function showGame(game){
     </div>
     `;
 
-    document
-        .querySelectorAll(".game-card")
-        .forEach(card => card.classList.remove("active"));
+    card.closest(".tier-content")
+        .appendChild(review);
 
-    document
-        .querySelector(`[data-title="${game.title}"]`)
-        ?.classList.add("active");
-
-    reviewPanel.scrollIntoView({
+    review.scrollIntoView({
         behavior:"smooth",
-        block:"start"
+        block:"nearest"
     });
+
 }
 
-tierOrder.forEach(tier => {
+function previousGame(){
 
-    const tierGames = games.filter(
-        game => game.tier === tier
-    );
+    const index =
+        games.findIndex(g=>g.title===currentGame.title);
 
-    const section = document.createElement("section");
+    const previous =
+        games[(index-1+games.length)%games.length];
+
+    showReview(previous);
+}
+
+function nextGame(){
+
+    const index =
+        games.findIndex(g=>g.title===currentGame.title);
+
+    const next =
+        games[(index+1)%games.length];
+
+    showReview(next);
+}
+
+tierOrder.forEach(tier=>{
+
+    const tierGames =
+        games.filter(g=>g.tier===tier);
+
+    const section =
+        document.createElement("section");
 
     section.className = "tier";
 
     section.innerHTML = `
     <div class="tier-header ${getTierClass(tier)}">
-
-        <span>
-            ${tier === "DNF"
-                ? "Did Not Finish"
-                : tier + " Tier"}
-        </span>
-
+    ${tier==="DNF" ? "Did Not Finish" : tier+" Tier"}
     </div>
 
     <div class="tier-content">
 
         <div class="game-grid">
 
-            ${tierGames.map(game => `
+        ${tierGames.map(game=>`
 
             <div
                 class="game-card"
@@ -527,46 +388,73 @@ tierOrder.forEach(tier => {
 
             </div>
 
-            `).join("")}
+        `).join("")}
 
         </div>
 
     </div>
     `;
 
-    tiersContainer.appendChild(section);
+    container.appendChild(section);
 
 });
 
-document.addEventListener("click", e => {
+document.addEventListener("click", e=>{
 
-    const card = e.target.closest(".game-card");
+    const card =
+        e.target.closest(".game-card");
 
-    if(!card) return;
+    if(card){
 
-    const game = games.find(
-        g => g.title === card.dataset.title
-    );
+        const game =
+            games.find(
+                g=>g.title===card.dataset.title
+            );
 
-    if(game){
-        showGame(game);
+        showReview(game);
+    }
+
+    const header =
+        e.target.closest(".tier-header");
+
+    if(header){
+
+        header
+            .closest(".tier")
+            .classList.toggle("collapsed");
     }
 
 });
 
-document
-    .querySelectorAll(".tier-header")
-    .forEach(header => {
+let touchStartX = 0;
 
-        header.addEventListener("click", () => {
+document.addEventListener("touchstart", e=>{
 
-            header
-                .closest(".tier")
-                .classList.toggle("collapsed");
+    touchStartX = e.changedTouches[0].clientX;
 
-        });
+});
 
-    });
+document.addEventListener("touchend", e=>{
+
+    if(!currentGame) return;
+
+    let touchEndX =
+        e.changedTouches[0].clientX;
+
+    let diff = touchStartX - touchEndX;
+
+    if(Math.abs(diff) < 50) return;
+
+    if(diff > 0){
+
+        nextGame();
+
+    } else {
+
+        previousGame();
+    }
+
+});
 
 </script>
 
