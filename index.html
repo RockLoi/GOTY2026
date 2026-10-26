@@ -123,8 +123,12 @@ header p{
 
 .game-card.active{
     border-color:white;
+    transform:translateY(-3px);
+    box-shadow:
+        0 0 0 2px white,
+        0 0 20px rgba(255,255,255,.25);
 }
-
+    
 .game-card img{
     width:100%;
     aspect-ratio:2/3;
@@ -610,9 +614,31 @@ document.addEventListener("click", event => {
             g => g.title === card.dataset.title
         );
 
-    if(game){
-        showReview(game);
+    if(!game) return;
+
+    const isAlreadyOpen =
+        currentGame &&
+        currentGame.title === game.title;
+
+    if(isAlreadyOpen){
+
+        document
+            .querySelectorAll(".review-card")
+            .forEach(card => card.remove());
+
+        document
+            .querySelectorAll(".game-card")
+            .forEach(card =>
+                card.classList.remove("active")
+            );
+
+        currentGame = null;
+
+        return;
     }
+
+    showReview(game);
+
 });
 
 let touchStartX = 0;
