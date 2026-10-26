@@ -3,22 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My GOTY Tier List</title>
+<title>Lee's GOTY Tier List</title>
 
 <style>
 :root{
     --bg:#0f1117;
     --panel:#181c24;
     --panel-hover:#222838;
-    --text:#e8eaf0;
-    --muted:#a8afc1;
     --border:#30364a;
+    --text:#e8eaf0;
+    --muted:#9da5b7;
 
     --s:#ffb703;
     --a:#90be6d;
     --b:#4cc9f0;
     --c:#c77dff;
     --d:#6c757d;
+    --dnf:#8b0000;
 }
 
 *{
@@ -28,9 +29,9 @@
 }
 
 body{
+    font-family:Segoe UI, system-ui, sans-serif;
     background:var(--bg);
     color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     line-height:1.6;
 }
 
@@ -47,6 +48,7 @@ header{
 
 header h1{
     font-size:2.5rem;
+    margin-bottom:10px;
 }
 
 header p{
@@ -59,18 +61,26 @@ header p{
     border-radius:20px;
     overflow:hidden;
     margin-bottom:30px;
-    min-height:250px;
 }
 
-.review-content{
-    padding:20px;
+.placeholder{
+    padding:60px 20px;
+    text-align:center;
+    color:var(--muted);
+}
+
+.review-layout{
+    display:block;
 }
 
 .review-cover{
     width:100%;
-    max-height:450px;
-    object-fit:cover;
     display:block;
+    object-fit:cover;
+}
+
+.review-content{
+    padding:20px;
 }
 
 .review-title{
@@ -80,7 +90,7 @@ header p{
 
 .review-tier{
     display:inline-block;
-    padding:4px 12px;
+    padding:6px 12px;
     border-radius:999px;
     font-weight:bold;
     margin-bottom:15px;
@@ -90,44 +100,38 @@ header p{
     white-space:pre-line;
 }
 
-.placeholder{
-    padding:50px 20px;
-    text-align:center;
-    color:var(--muted);
-}
-
 .tier{
     margin-bottom:25px;
 }
 
 .tier-header{
     padding:12px 16px;
-    font-size:1.4rem;
+    font-size:1.3rem;
     font-weight:bold;
     border-radius:12px;
     margin-bottom:10px;
 }
 
-.tier-s{background:var(--s); color:#000;}
-.tier-a{background:var(--a); color:#000;}
-.tier-b{background:var(--b); color:#000;}
-.tier-c{background:var(--c); color:#fff;}
-.tier-d{background:var(--d); color:#fff;}
+.tier-s{background:var(--s);color:#000;}
+.tier-a{background:var(--a);color:#000;}
+.tier-b{background:var(--b);color:#000;}
+.tier-c{background:var(--c);}
+.tier-d{background:var(--d);}
+.tier-dnf{background:var(--dnf);}
 
 .game-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
     gap:12px;
 }
 
 .game-card{
-    border:none;
     background:var(--panel);
     border-radius:12px;
     overflow:hidden;
     cursor:pointer;
-    transition:.2s;
     border:2px solid transparent;
+    transition:0.2s;
 }
 
 .game-card:hover{
@@ -148,20 +152,19 @@ header p{
 
 .game-title{
     padding:8px;
-    font-size:.85rem;
+    font-size:0.85rem;
     text-align:center;
 }
 
 @media (min-width:900px){
 
-    .review-content-wrapper{
+    .review-layout{
         display:grid;
         grid-template-columns:300px 1fr;
     }
 
     .review-cover{
         height:100%;
-        max-height:none;
     }
 }
 </style>
@@ -171,13 +174,13 @@ header p{
 <div class="container">
 
 <header>
-    <h1>🏆 My GOTY Tier List</h1>
-    <p>Tap a cover to read my thoughts.</p>
+    <h1>🏆 Lee's GOTY Tier List</h1>
+    <p>Click any cover to read my thoughts.</p>
 </header>
 
 <div class="review-panel" id="reviewPanel">
     <div class="placeholder">
-        Select a game to view the review.
+        Select a game to see the review.
     </div>
 </div>
 
@@ -187,174 +190,324 @@ header p{
 
 <script>
 
-/*
-===================================================
-EDIT YOUR GAMES HERE
-===================================================
-Place images inside:
-
-images/
-
-Example:
-images/balatro.jpg
-images/rebirth.jpg
-===================================================
-*/
-
 const games = [
 
+/* S */
+
 {
-    title: "Example S Tier Game",
-    tier: "S",
-    image: "images/example-s.jpg",
-    review: `
-Paragraph one goes here.
+title:"No Rest for the Wicked",
+tier:"S",
+image:"images/No Rest For The Wicked.jpg",
+review:`Replace with your review.
 
-Paragraph two goes here.
-
-This section supports multiple paragraphs naturally.
-`
+Second paragraph here.`
 },
 
 {
-    title: "Another S Tier Game",
-    tier: "S",
-    image: "images/example-s2.jpg",
-    review: `
-Why this game deserves S tier.
+title:"Order of the Sinking Star",
+tier:"S",
+image:"images/Order Of The Sinking Star.jpg",
+review:`Replace with your review.
 
-Add as much text as you like.
-`
+Second paragraph here.`
 },
 
 {
-    title: "Great A Tier Game",
-    tier: "A",
-    image: "images/example-a.jpg",
-    review: `
-Your review here.
-`
+title:"Slay the Spire 2",
+tier:"S",
+image:"images/Slay The Spire 2.png",
+review:`Replace with your review.
+
+Second paragraph here.`
+},
+
+/* A */
+
+{
+title:"Big Walk",
+tier:"A",
+image:"images/Big Walk.png",
+review:`Replace with your review.`
 },
 
 {
-    title: "Solid B Tier Game",
-    tier: "B",
-    image: "images/example-b.jpg",
-    review: `
-Your review here.
-`
+title:"Kaizen: A Factory Story",
+tier:"A",
+image:"images/Kaizen A Factory Story.png",
+review:`Replace with your review.`
 },
 
 {
-    title: "Mixed C Tier Game",
-    tier: "C",
-    image: "images/example-c.jpg",
-    review: `
-Your review here.
-`
+title:"Marvel's Spider-Man 2",
+tier:"A",
+image:"images/Marvels Spider-Man 2.webp",
+review:`Replace with your review.`
 },
 
 {
-    title: "Disappointing D Tier Game",
-    tier: "D",
-    image: "images/example-d.jpg",
-    review: `
-Your review here.
-`
+title:"Mina the Hollower",
+tier:"A",
+image:"images/Mina the Hollower.png",
+review:`Replace with your review.`
+},
+
+{
+title:"Opus Magnum: De Re Metallica",
+tier:"A",
+image:"images/Opus Magnum De Re Metallica.jpg",
+review:`Replace with your review.`
+},
+
+{
+title:"Sifu",
+tier:"A",
+image:"images/Sifu.jpg",
+review:`Replace with your review.`
+},
+
+{
+title:"Two Point Museum",
+tier:"A",
+image:"images/Two Point Museum.png",
+review:`Replace with your review.`
+},
+
+{
+title:"Well Dweller",
+tier:"A",
+image:"images/Well Dweller.jpg",
+review:`Replace with your review.`
+},
+
+/* B */
+
+{
+title:"Castlevania: Belmont's Curse",
+tier:"B",
+image:"images/Castlevania Belmont's Curse.png",
+review:`Replace with your review.`
+},
+
+{
+title:"Dogpile",
+tier:"B",
+image:"images/Dogpile.jpg",
+review:`Replace with your review.`
+},
+
+{
+title:"Kabuto Park",
+tier:"B",
+image:"images/Kabuto Park.png",
+review:`Replace with your review.`
+},
+
+{
+title:"LEGO Voyagers",
+tier:"B",
+image:"images/LEGO Voyagers.jpg",
+review:`Replace with your review.`
+},
+
+{
+title:"Nintendo Switch Sports Resort",
+tier:"B",
+image:"images/Nintendo Switch Sports Resort.avif",
+review:`Replace with your review.`
+},
+
+{
+title:"Sheepo",
+tier:"B",
+image:"images/Sheepo.png",
+review:`Replace with your review.`
+},
+
+{
+title:"The Outer Worlds 2",
+tier:"B",
+image:"images/The Outer Worlds 2.jpg",
+review:`Replace with your review.`
+},
+
+{
+title:"UVS Nirmana",
+tier:"B",
+image:"images/UVS Nirmana.png",
+review:`Replace with your review.`
+},
+
+/* C */
+
+{
+title:"Subnautica Below Zero",
+tier:"C",
+image:"images/Subnautica Below Zero.jpg",
+review:`Replace with your review.`
+},
+
+{
+title:"The Signal State",
+tier:"C",
+image:"images/The Signal State.webp",
+review:`Replace with your review.`
+},
+
+{
+title:"Wo Long: Fallen Dynasty",
+tier:"C",
+image:"images/Wo Long Fallen Dynasty.png",
+review:`Replace with your review.`
+},
+
+{
+title:"Beast of Reincarnation",
+tier:"C",
+image:"images/Beast of Reincarnation.jpg",
+review:`Replace with your review.`
+},
+
+/* D */
+
+{
+title:"Katamari Royal Reverie",
+tier:"D",
+image:"images/Katamari Royal Reverie.jpg",
+review:`Replace with your review.`
+},
+
+{
+title:"Metroid Prime 4 Beyond",
+tier:"D",
+image:"images/Metroid Prime 4 Beyond.png",
+review:`Replace with your review.`
+},
+
+/* DNF */
+
+{
+title:"Forza Horizon 6",
+tier:"DNF",
+image:"images/Forza Horizon 6.png",
+review:`Replace with your review.`
+},
+
+{
+title:"Pinball Spire",
+tier:"DNF",
+image:"images/Pinball Spire.jpg",
+review:`Replace with your review.`
+},
+
+{
+title:"Resident Evil 4",
+tier:"DNF",
+image:"images/Resident Evil 4.png",
+review:`Replace with your review.`
 }
 
 ];
 
-const tierOrder = ["S","A","B","C","D"];
-
-const reviewPanel = document.getElementById("reviewPanel");
-const tierContainer = document.getElementById("tiers");
+const tierOrder = ["S","A","B","C","D","DNF"];
 
 function getTierClass(tier){
+    if(tier === "DNF") return "tier-dnf";
     return `tier-${tier.toLowerCase()}`;
 }
+
+const reviewPanel = document.getElementById("reviewPanel");
+const tiersContainer = document.getElementById("tiers");
 
 function showGame(game){
 
     reviewPanel.innerHTML = `
-        <div class="review-content-wrapper">
-            ${game.image}
-            <div class="review-content">
-                <div class="review-title">${game.title}</div>
+    <div class="review-layout">
 
-                <div class="review-tier ${getTierClass(game.tier)}">
-                    ${game.tier} Tier
-                </div>
+        <img
+            class="review-cover"
+            src="${game.image}"
+            alt="${game.title}">
 
-                <div class="review-text">
-                    ${game.review}
-                </div>
+        <div class="review-content">
+
+            <div class="review-title">
+                ${game.title}
             </div>
+
+            <div class="review-tier ${getTierClass(game.tier)}">
+                ${game.tier === "DNF" ? "Did Not Finish" : game.tier + " Tier"}
+            </div>
+
+            <div class="review-text">
+                ${game.review}
+            </div>
+
         </div>
+
+    </div>
     `;
 
     document
         .querySelectorAll(".game-card")
         .forEach(card => card.classList.remove("active"));
 
-    const active = document.querySelector(
-        `[data-title="${CSS.escape(game.title)}"]`
-    );
-
-    if(active){
-        active.classList.add("active");
-    }
-
-    reviewPanel.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-    });
+    document
+        .querySelector(`[data-title="${game.title}"]`)
+        ?.classList.add("active");
 }
 
 tierOrder.forEach(tier => {
 
-    const tierGames = games.filter(g => g.tier === tier);
-
-    if(!tierGames.length) return;
+    const tierGames = games.filter(game => game.tier === tier);
 
     const section = document.createElement("section");
     section.className = "tier";
 
     section.innerHTML = `
-        <div class="tier-header ${getTierClass(tier)}">
-            ${tier} Tier
+    <div class="tier-header ${getTierClass(tier)}">
+        ${tier === "DNF" ? "Did Not Finish" : tier + " Tier"}
+    </div>
+
+    <div class="game-grid">
+
+        ${tierGames.map(game => `
+
+        <div
+            class="game-card"
+            data-title="${game.title}">
+
+            <img
+                src="${game.image}"
+                alt="${game.title}">
+
+            <div class="game-title">
+                ${game.title}
+            </div>
+
         </div>
 
-        <div class="game-grid">
-            ${tierGames.map(game => `
-                <button
-                    class="game-card"
-                    data-title="${game.title}">
+        `).join("")}
 
-                    ${game.image}
-
-                    <div class="game-title">
-                        ${game.title}
-                    </div>
-                </button>it's why many people I know use a console when 15 years ago they used a PC, and that's even without any kind of hacking or pira
-            `).join("")}
-        </div>
+    </div>
     `;
 
-    tierContainer.appendChild(section);
+    tiersContainer.appendChild(section);
+
 });
 
-document.querySelectorAll(".game-card").forEach(card => {
+document.addEventListener("click", e => {
 
-    card.addEventListener("click", () => {
+    const card = e.target.closest(".game-card");
 
-        const title = card.dataset.title;
-        const game = games.find(g => g.title === title);
+    if(!card) return;
 
-        if(game){
-            showGame(game);
-        }
-    });
+    const game = games.find(
+        g => g.title === card.dataset.title
+    );
+
+    if(game){
+        showGame(game);
+    }
 
 });
 
