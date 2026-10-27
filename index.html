@@ -502,14 +502,12 @@ function showReview(game){
 reviewCard.innerHTML = `
     <div class="review-content">
 
-                <div class="review-tier ${getTierClass(game.tier)}">
-                    ${getTierText(game.tier)}
-                </div>
-
                 <div class="review-text">
                     ${game.review}
                 </div>
-
+                <div class="review-tier ${getTierClass(game.tier)}">
+                    ${getTierText(game.tier)}
+                </div>
           <div class="nav-buttons">
                 <button onclick="previousGame()">
                     <
