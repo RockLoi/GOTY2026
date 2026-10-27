@@ -485,15 +485,8 @@ function showReview(game){
 
     reviewCard.className = "review-card";
 
-    reviewCard.innerHTML = `
-        <div class="review-layout">
-
-            <img
-                class="review-image"
-                src="${game.image}"
-                alt="${game.title}">
-
-            <div class="review-content">
+reviewCard.innerHTML = `
+    <div class="review-content">
 
             <div class="nav-buttons">
                 <button onclick="previousGame()">
@@ -521,9 +514,6 @@ function showReview(game){
                 <div class="review-text">
                     ${game.review}
                 </div>
-
-            </div>
-
         </div>
     `;
 
