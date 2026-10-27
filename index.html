@@ -494,15 +494,20 @@ function showReview(game){
 
             <div class="review-content">
 
-                <div class="nav-buttons">
-                    <button onclick="previousGame()">
-                        ← Previous
-                    </button>
+            <div class="nav-buttons">
+                <button onclick="previousGame()">
+                    ← Previous
+                </button>
+            
+                <button onclick="closeReview()">
+                    ✕ Close
+                </button>
+            
+                <button onclick="nextGame()">
+                    Next →
+                </button>
+            </div>
 
-                    <button onclick="nextGame()">
-                        Next →
-                    </button>
-                </div>
 
                 <div class="review-title">
                     ${game.title}
@@ -558,6 +563,20 @@ function previousGame(){
     showReview(previous);
 }
 
+    function closeReview(){
+
+    document
+        .querySelectorAll(".review-card")
+        .forEach(card => card.remove());
+
+    document
+        .querySelectorAll(".game-card")
+        .forEach(card =>
+            card.classList.remove("active")
+        );
+
+    currentGame = null;
+}
 const tiersContainer =
     document.getElementById("tiers");
 
