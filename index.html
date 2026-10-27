@@ -237,21 +237,29 @@ const games = [
 title:"No Rest for the Wicked",
 tier:"S",
 image:"images/No Rest For The Wicked.jpg",
-review:`No Rest for the Wicked is a game that's as fun to play alone as it is with a group, which is something I don't think I've experienced for a long time. It highlights a lot of issues with other games in the surrounding genres like ARPGs and Souls games and legitimately does its best to address them. The multiplayer servers acting as persistent worlds makes them feel so much more like they belong to the group, and building up Sacrament together is a joy, even if you have a private server of your own. Disappointing not to see it leave early access this year as planned, but if it continues on the path its already set then it's likely to be my favourite game next year as well.`
+review:`No Rest for the Wicked is a game that's as fun to play alone as it is with a group, which is something I don't think I've experienced for a long time. It highlights a lot of issues with other games in the surrounding genres like ARPGs and Souls games and legitimately does its best to address them. The multiplayer servers acting as persistent worlds makes them feel so much more like they belong to the group, and building up Sacrament together is a joy, even if you have a private server of your own.
+
+Disappointing not to see it leave early access this year as planned, but if it continues on the path its already set then it's likely to be my favourite game next year as well.`
 },
 
 {
 title:"Order of the Sinking Star",
 tier:"S",
 image:"images/Order Of The Sinking Star.jpg",
-review:`It's been 10 years since The Witness, and Thekla have tried once again to make something that's not quite been made before. It's not quite as creative as The Witness, which genuinely did fuse the 3D world and the 2D line puzzles in a way that led to constant moments of discovery, but it comes pretty close - even if it takes much (much) longer to get there. It's a Sokoban, which for the unfamiliar is a block-pushing puzzle, ranging in complexity from the one included in my daughter's digital camera to the mind-bogglingly difficult Baba Is You. It actually begins with four existing indie sokobans which you learn the mechanics of and play as you head out in the cardinal directions, but as you explore the map these games' mechanics come together in new and sometimes unexpected ways. There are some genuine moments of discovery here, but the most profound probably occurs near the end credits (which was 70 hours and 400 puzzles for me personally), so you really can't just dip your toe in and expect excitement - you have to find intrinsic joy in solving the puzzles along the way. If you do enjoy that then you'll likely find the best puzzle game since, well, The Witness.`
+review:`It's been 10 years since The Witness, and Thekla have tried once again to make something that's not quite been made before. It's not quite as creative as The Witness, which genuinely did fuse the 3D world and the 2D line puzzles in a way that led to constant moments of discovery, but it comes pretty close - even if it takes much (much) longer to get there.
+
+It's a Sokoban, which for the unfamiliar is a block-pushing puzzle, ranging in complexity from the one included in my daughter's digital camera to the mind-bogglingly difficult Baba Is You. It actually begins with four existing indie sokobans which you learn the mechanics of and play as you head out in the cardinal directions, but as you explore the map these games' mechanics come together in new and sometimes unexpected ways. There are some genuine moments of discovery here, but the most profound probably occurs near the end credits (which was 70 hours and 400 puzzles for me personally), so you really can't just dip your toe in and expect excitement - you have to find intrinsic joy in solving the puzzles along the way.
+
+If you do enjoy that then you'll likely find the best puzzle game since, well, The Witness.`
 },
 
 {
 title:"Slay the Spire 2",
 tier:"S",
 image:"images/Slay The Spire 2.png",
-review:`I had low expectations for Slay The Spire 2, not that I didn't think Mega Crit had it in them, but being the one who spawned a new genre and hundreds of copycats of varying quality (some genuinely great ones!) can be a lot of pressure, and StS2 was by all early impressions looking to be very much the same game as StS. And it was, almost exactly the same. Most of the characters are the same, most of the cards are the same, many of the relics and structure and types of events are the same. But it turns out none of that mattered because I STILL spent hundreds of hours on it completing everything up to Ascension 10 on every character. Another Early Access title takes one of my top spots, but even though Act 4 isn't out yet it's already the best in the genre. It's better than Slay the Spire, which was already the best, so really this outcome was inevitable. `
+review:`I had low expectations for Slay The Spire 2, not that I didn't think Mega Crit had it in them, but being the one who spawned a new genre and hundreds of copycats of varying quality (some genuinely great ones!) can be a lot of pressure, and StS2 was by all early impressions looking to be very much the same game as StS. And it was, almost exactly the same. Most of the characters are the same, most of the cards are the same, many of the relics and structure and types of events are the same.
+
+But it turns out none of that mattered because I STILL spent hundreds of hours on it completing everything up to Ascension 10 on every character. Another Early Access title takes one of my top spots, but even though Act 4 isn't out yet it's already the best in the genre. It's better than Slay the Spire, which was already the best, so really this outcome was inevitable. `
 },
 
 /* A */
@@ -488,7 +496,19 @@ function showReview(game){
 reviewCard.innerHTML = `
     <div class="review-content">
 
-            <div class="nav-buttons">
+                <div class="review-title">
+                    ${game.title}
+                </div>
+
+                <div class="review-tier ${getTierClass(game.tier)}">
+                    ${getTierText(game.tier)}
+                </div>
+
+                <div class="review-text">
+                    ${game.review}
+                </div>
+
+          <div class="nav-buttons">
                 <button onclick="previousGame()">
                     ← Previous
                 </button>
@@ -501,19 +521,6 @@ reviewCard.innerHTML = `
                     Next →
                 </button>
             </div>
-
-
-                <div class="review-title">
-                    ${game.title}
-                </div>
-
-                <div class="review-tier ${getTierClass(game.tier)}">
-                    ${getTierText(game.tier)}
-                </div>
-
-                <div class="review-text">
-                    ${game.review}
-                </div>
         </div>
     `;
 
