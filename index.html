@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lee's GOTY Tier List</title>
+<title>Lee's GOTY Tier List Final?</title>
 
 <style>
 :root{
@@ -143,6 +143,7 @@ header p{
 }
 
 .review-card{
+    grid-column:1 / -1;
     margin-top:15px;
     background:var(--panel);
     border:1px solid var(--border);
@@ -526,14 +527,46 @@ function showReview(game){
         </div>
     `;
 
-    selectedCard
-        .closest(".tier")
-        .appendChild(reviewCard);
+const grid =
+    selectedCard.closest(".game-grid");
 
-    reviewCard.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
-    });
+const cards =
+    Array.from(
+        grid.querySelectorAll(".game-card")
+    );
+
+const cardIndex =
+    cards.indexOf(selectedCard);
+
+const columns =
+    window.innerWidth < 700
+        ? 3
+        : Math.max(
+            1,
+            Math.round(
+                grid.offsetWidth /
+                selectedCard.offsetWidth
+            )
+        );
+
+const endOfRow =
+    Math.min(
+        cards.length - 1,
+        Math.floor(cardIndex / columns) *
+        columns +
+        (columns - 1)
+    );
+
+cards[endOfRow]
+    .insertAdjacentElement(
+        "afterend",
+        reviewCard
+    );
+
+reviewCard.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+});
 }
 
 function nextGame(){
