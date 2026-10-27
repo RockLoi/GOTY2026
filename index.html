@@ -563,7 +563,10 @@ function previousGame(){
     showReview(previous);
 }
 
-    function closeReview(){
+   function closeReview(){
+
+    const activeCard =
+        document.querySelector(".game-card.active");
 
     document
         .querySelectorAll(".review-card")
@@ -576,7 +579,13 @@ function previousGame(){
         );
 
     currentGame = null;
+
+    activeCard?.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
 }
+    
 const tiersContainer =
     document.getElementById("tiers");
 
@@ -659,42 +668,6 @@ document.addEventListener("click", event => {
     showReview(game);
 
 });
-
-let touchStartX = 0;
-
-document.addEventListener(
-    "touchstart",
-    event => {
-
-        touchStartX =
-            event.changedTouches[0].clientX;
-    }
-);
-
-document.addEventListener(
-    "touchend",
-    event => {
-
-        if(!currentGame) return;
-
-        const touchEndX =
-            event.changedTouches[0].clientX;
-
-        const difference =
-            touchStartX - touchEndX;
-
-        if(Math.abs(difference) < 50){
-            return;
-        }
-
-        if(difference > 0){
-            nextGame();
-        }
-        else{
-            previousGame();
-        }
-    }
-);
 
 </script>
 
