@@ -176,6 +176,7 @@ header p{
 
 .review-tier{
     display:block;
+    margin-top:10px;
     margin-left:auto;
     width:fit-content;
     padding:10px 14px;
@@ -184,9 +185,19 @@ header p{
     }
 
 .review-text{
-    white-space:pre-line;
-    margin-bottom:10px;
+    line-height:1.7;
+}
 
+.review-text h3{
+    margin:20px 0 10px;
+}
+
+.review-text p{
+    margin-bottom:12px;
+}
+
+.review-text strong{
+    font-weight:700;
 }
 
 .nav-buttons{
@@ -246,9 +257,21 @@ const games = [
 title:"No Rest for the Wicked",
 tier:"S",
 image:"images/No Rest For The Wicked.jpg",
-review:`No Rest for the Wicked is a game that's as fun to play alone as it is with a group, which is something I don't think I've experienced for a long time. It highlights a lot of issues with other games in the surrounding genres like ARPGs and Souls games and legitimately does its best to address them. The multiplayer servers acting as persistent worlds makes them feel so much more like they belong to the group, and building up Sacrament together is a joy, even if you have a private server of your own.
+review:`
+## Moon Studios
 
-Disappointing not to see it leave early access this year as planned, but if it continues on the path its already set then it's likely to be my favourite game next year as well.`
+When Moon set out to make the Ori titles, it seemed like they zeroed in on what they thought was the most important part of a metroidvania - the mobility and movement around the environment - and built everything else around that. Add in some solid level design and stunning visuals and you have my favourite metroidvanias. Hell, probably two of my favourite games overall.
+
+## No Rest
+
+There certainly is an element of that in No Rest for the Wicked, this time deciding that the centre of an ARPG should be deliberate and impactful combat, in a way that it simply isn't in Diablo. But that really is just the start of what they're trying to make, with systems running the gamut of world-building and character building, houses and roguelike modes and world bosses and a captivating story. They are still aiming to overhaul major parts of their game for the release early next year, with a job system inspired by Final Fantasy Tactics, having found another trope in gaming they'd like to fix - the attribute stats.
+
+## Together
+
+It's a game that's as fun to play alone as it is with a group, which is something I don't think I've experienced for a long time. The multiplayer servers acting as persistent worlds makes them feel so much more like they belong to the group, and building up Sacrament together is a joy, turning a maligned gathering mechanic into manageable and rewarding progress. The way they handle shared progress through the MMO-style realm system is so good I really don't know why it's not more common.
+
+No Rest for the Wicked is a culmination and reinvention of existing game archetypes that I did not know I wanted, and now realise is what I've 'always' wanted. If this game has the scope and the future they are promising, then I can see myself playing it for years to come, like an MMO without the heavy timesink.
+`
 },
 
 {
@@ -505,8 +528,9 @@ function showReview(game){
 reviewCard.innerHTML = `
     <div class="review-content">
                 <div class="review-text">
-                    ${game.review}
+                    ${formatReview(game.review)}
                 </div>
+
                 <div class="review-tier ${getTierClass(game.tier)}">
                     ${getTierText(game.tier)}
                 </div>
@@ -568,6 +592,21 @@ selectedCard.scrollIntoView({
 });
 }
 
+function formatReview(text){
+
+    return text
+        .split("\n\n")
+        .map(block => {
+
+            if(block.startsWith("## ")){
+                return `<h3>${block.slice(3)}</h3>`;
+            }
+
+            return `<p>${block}</p>`;
+        })
+        .join("");
+}
+    
 function nextGame(){
 
     const index = games.findIndex(
